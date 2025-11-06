@@ -1,0 +1,829 @@
+mysql> select databses;
+ERROR 1054 (42S22): Unknown column 'databses' in 'field list'mysql> select database();
++------------+
+| database() |
++------------+
+| dac11      |
++------------+
+1 row in set (0.00 sec)
+
+mysql> create database KING;
+ERROR 1044 (42000): Access denied for user 'dac11'@'%' to database 'king'
+mysql> show databases;
++--------------------+
+| Database           |
++--------------------+
+| dac11              |
+| information_schema |
+| performance_schema |
++--------------------+
+3 rows in set (0.00 sec)
+
+mysql> use performance_schema;
+ERROR 1044 (42000): Access denied for user 'dac11'@'%' to database 'performance_schema'
+mysql> use  ;
+ERROR:
+USE must be followed by a database name
+mysql> use information_schema;
+Database changed
+mysql> show tables;
++---------------------------------------+
+| Tables_in_information_schema          |
++---------------------------------------+
+| ADMINISTRABLE_ROLE_AUTHORIZATIONS     |
+| APPLICABLE_ROLES                      |
+| CHARACTER_SETS                        |
+| CHECK_CONSTRAINTS                     |
+| COLLATION_CHARACTER_SET_APPLICABILITY |
+| COLLATIONS                            |
+| COLUMN_PRIVILEGES                     |
+| COLUMN_STATISTICS                     |
+| COLUMNS                               |
+| COLUMNS_EXTENSIONS                    |
+| ENABLED_ROLES                         |
+| ENGINES                               |
+| EVENTS                                |
+| FILES                                 |
+| INNODB_BUFFER_PAGE                    |
+| INNODB_BUFFER_PAGE_LRU                |
+| INNODB_BUFFER_POOL_STATS              |
+| INNODB_CACHED_INDEXES                 |
+| INNODB_CMP                            |
+| INNODB_CMP_PER_INDEX                  |
+| INNODB_CMP_PER_INDEX_RESET            |
+| INNODB_CMP_RESET                      |
+| INNODB_CMPMEM                         |
+| INNODB_CMPMEM_RESET                   |
+| INNODB_COLUMNS                        |
+| INNODB_DATAFILES                      |
+| INNODB_FIELDS                         |
+| INNODB_FOREIGN                        |
+| INNODB_FOREIGN_COLS                   |
+| INNODB_FT_BEING_DELETED               |
+| INNODB_FT_CONFIG                      |
+| INNODB_FT_DEFAULT_STOPWORD            |
+| INNODB_FT_DELETED                     |
+| INNODB_FT_INDEX_CACHE                 |
+| INNODB_FT_INDEX_TABLE                 |
+| INNODB_INDEXES                        |
+| INNODB_METRICS                        |
+| INNODB_SESSION_TEMP_TABLESPACES       |
+| INNODB_TABLES                         |
+| INNODB_TABLESPACES                    |
+| INNODB_TABLESPACES_BRIEF              |
+| INNODB_TABLESTATS                     |
+| INNODB_TEMP_TABLE_INFO                |
+| INNODB_TRX                            |
+| INNODB_VIRTUAL                        |
+| KEY_COLUMN_USAGE                      |
+| KEYWORDS                              |
+| OPTIMIZER_TRACE                       |
+| PARAMETERS                            |
+| PARTITIONS                            |
+| PLUGINS                               |
+| PROCESSLIST                           |
+| PROFILING                             |
+| REFERENTIAL_CONSTRAINTS               |
+| RESOURCE_GROUPS                       |
+| ROLE_COLUMN_GRANTS                    |
+| ROLE_ROUTINE_GRANTS                   |
+| ROLE_TABLE_GRANTS                     |
+| ROUTINES                              |
+| SCHEMA_PRIVILEGES                     |
+| SCHEMATA                              |
+| SCHEMATA_EXTENSIONS                   |
+| ST_GEOMETRY_COLUMNS                   |
+| ST_SPATIAL_REFERENCE_SYSTEMS          |
+| ST_UNITS_OF_MEASURE                   |
+| STATISTICS                            |
+| TABLE_CONSTRAINTS                     |
+| TABLE_CONSTRAINTS_EXTENSIONS          |
+| TABLE_PRIVILEGES                      |
+| TABLES                                |
+| TABLES_EXTENSIONS                     |
+| TABLESPACES                           |
+| TABLESPACES_EXTENSIONS                |
+| TRIGGERS                              |
+| USER_ATTRIBUTES                       |
+| USER_PRIVILEGES                       |
+| VIEW_ROUTINE_USAGE                    |
+| VIEW_TABLE_USAGE                      |
+| VIEWS                                 |
++---------------------------------------+
+79 rows in set (0.04 sec)
+
+mysql> show engines;
++--------------------+---------+----------------------------------------------------------------+--------------+------+------------+
+| Engine             | Support | Comment                                                        | Transactions | XA   | Savepoints |
++--------------------+---------+----------------------------------------------------------------+--------------+------+------------+
+| MEMORY             | YES     | Hash based, stored in memory, useful for temporary tables      | NO           | NO   | NO         |
+| MRG_MYISAM         | YES     | Collection of identical MyISAM tables                          | NO           | NO   | NO         |
+| CSV                | YES     | CSV storage engine                                             | NO           | NO   | NO         |
+| FEDERATED          | NO      | Federated MySQL storage engine                                 | NULL         | NULL | NULL       |
+| PERFORMANCE_SCHEMA | YES     | Performance Schema                                             | NO           | NO   | NO         |
+| MyISAM             | YES     | MyISAM storage engine                                          | NO           | NO   | NO         |
+| InnoDB             | DEFAULT | Supports transactions, row-level locking, and foreign keys     | YES          | YES  | YES        |
+| ndbinfo            | NO      | MySQL Cluster system information storage engine                | NULL         | NULL | NULL       |
+| BLACKHOLE          | YES     | /dev/null storage engine (anything you write to it disappears) | NO           | NO   | NO         |
+| ARCHIVE            | YES     | Archive storage engine                                         | NO           | NO   | NO         |
+| ndbcluster         | NO      | Clustered, fault-tolerant tables                               | NULL         | NULL | NULL       |
++--------------------+---------+----------------------------------------------------------------+--------------+------+------------+
+11 rows in set (0.00 sec)
+
+mysql> show databases;
++--------------------+
+| Database           |
++--------------------+
+| dac11              |
+| information_schema |
+| performance_schema |
++--------------------+
+3 rows in set (0.00 sec)
+
+mysql> use dac11;
+Database changed
+mysql> desc emp;
++-----------+-------------+------+-----+---------+-------+
+| Field     | Type        | Null | Key | Default | Extra |
++-----------+-------------+------+-----+---------+-------+
+| EMPNO     | int         | NO   | PRI | NULL    |       |
+| ENAME     | varchar(12) | YES  |     | NULL    |       |
+| GENDER    | char(1)     | YES  |     | NULL    |       |
+| JOB       | varchar(20) | YES  |     | NULL    |       |
+| MGR       | int         | YES  | MUL | NULL    |       |
+| HIREDATE  | date        | YES  |     | NULL    |       |
+| SAL       | int         | YES  |     | NULL    |       |
+| COMM      | int         | YES  |     | NULL    |       |
+| DEPTNO    | int         | NO   | MUL | NULL    |       |
+| BONUSID   | int         | YES  |     | NULL    |       |
+| USER NAME | varchar(20) | YES  |     | NULL    |       |
+| PWD       | varchar(20) | YES  |     | NULL    |       |
+| PHONE     | varchar(45) | YES  |     | NULL    |       |
+| isActive  | tinyint(1)  | YES  |     | NULL    |       |
++-----------+-------------+------+-----+---------+-------+
+14 rows in set (0.04 sec)
+
+mysql> show tables;
++---------------------+
+| Tables_in_dac11     |
++---------------------+
+| a                   |
+| activity            |
+| agent               |
+| airline_seats       |
+| andor               |
+| atm                 |
+| b                   |
+| bankloan            |
+| batch_schedule      |
+| betweensalary       |
+| bitwise             |
+| blanktablea         |
+| blanktableb         |
+| blog                |
+| bonus               |
+| books               |
+| brands              |
+| bus_stops           |
+| cafe                |
+| candidate           |
+| cardpayments        |
+| cashpayments        |
+| categories          |
+| category            |
+| cdac                |
+| city                |
+| classandsubjects    |
+| client              |
+| cnumbers            |
+| coalesce            |
+| comments            |
+| company             |
+| countnulls          |
+| countnumbers        |
+| cricketwinnerteam   |
+| customer            |
+| customers           |
+| dac                 |
+| demodept1           |
+| demodept2           |
+| dept                |
+| dept1               |
+| dhl                 |
+| docs                |
+| doctor              |
+| doctorvisits        |
+| dummy               |
+| duplicate           |
+| emp                 |
+| emp1                |
+| emp2                |
+| emp_attendance      |
+| emp_cards           |
+| emp_phone           |
+| empj                |
+| envelope            |
+| facebook            |
+| fedex               |
+| food                |
+| food_category_tags  |
+| food_items          |
+| fromstoreorders     |
+| fruits              |
+| fullname            |
+| hall_ticket         |
+| hobby               |
+| ipl                 |
+| item                |
+| job_list            |
+| key_parts           |
+| labtestlist         |
+| leading_zeroes      |
+| leadtable           |
+| licence             |
+| linkedin            |
+| location            |
+| managers            |
+| mass_table          |
+| medicinelist        |
+| menucard            |
+| missingnumbers      |
+| nearest             |
+| new                 |
+| newbooks            |
+| null1               |
+| null2               |
+| nullif              |
+| numberstring        |
+| onlineorders        |
+| ord                 |
+| order1              |
+| order_items         |
+| orderdetails        |
+| orders              |
+| overlapping_dates   |
+| overtime            |
+| patient             |
+| phonecall           |
+| pivot_table         |
+| plumber             |
+| plumber_service_map |
+| points              |
+| population          |
+| price               |
+| product             |
+| product_sales       |
+| products            |
+| pune_metro_stations |
+| quarterly_revenue   |
+| r                   |
+| r1                  |
+| r2                  |
+| races               |
+| regexpr             |
+| repeatingnumbers    |
+| replacedept         |
+| reservations        |
+| revenue             |
+| rockets             |
+| room_assigned       |
+| room_staff          |
+| rooms               |
+| runners             |
+| runningserver       |
+| sales               |
+| sales1              |
+| sales_channel       |
+| salespeople         |
+| salesperson         |
+| salgrade            |
+| server              |
+| service             |
+| seta                |
+| setb                |
+| shop                |
+| softdrink           |
+| sort                |
+| sourcecity          |
+| sourcenames         |
+| stadium             |
+| stages              |
+| states              |
+| station             |
+| status              |
+| stocks              |
+| stringnumber        |
+| student             |
+| swapcity            |
+| tablea              |
+| tableaa             |
+| tableb              |
+| tablebb             |
+| targetcity          |
+| targetnames         |
+| tasks               |
+| teams               |
+| temp1               |
+| trainers            |
+| trains              |
+| traintimetable      |
+| transactions        |
+| unpivot_table       |
+| ups                 |
+| vote_response       |
+| votes               |
+| warehouse           |
+| x                   |
+| year_of_service     |
+| yearly_revenue      |
+| years               |
+| z                   |
++---------------------+
+171 rows in set (0.01 sec)
+
+mysql> select * from emp;
++-------+----------+--------+---------------------+------+------------+------+------+--------+---------+--------------+------------+------------+----------+
+| EMPNO | ENAME    | GENDER | JOB                 | MGR  | HIREDATE   | SAL  | COMM | DEPTNO | BONUSID | USER NAME    | PWD        | PHONE      | isActive |
++-------+----------+--------+---------------------+------+------------+------+------+--------+---------+--------------+------------+------------+----------+
+|  6001 | GITA     | F      | Compliance officers | 7920 | 1981-07-19 | 1750 | NULL |     30 |       1 | GITA         | sales@2017 | NULL       |        1 |
+|  6129 | VRUSHALI | F      | Compliance officers | 7920 | 1981-07-19 | 1750 | NULL |     50 |       1 | VRUSHALI     | PUN@8877   | NULL       |        1 |
+|  6473 | SHARMIN  | F      | Public Relation     | 7920 | 1981-07-19 | 1750 | NULL |     20 |       1 | SHARMIN      | a12recmpm  | NULL       |        1 |
+|  6781 | BANDISH  | F      | Public Relation     | 7920 | 1981-07-19 | 1750 | NULL |     20 |       1 | BANDISH      | a12recmpm  | NULL       |        1 |
+|  7369 | SMITH    | M      | CLERK               | 7902 | 1980-12-17 |  800 | NULL |     20 |       2 | TRITONE      | a12recmpm  | 7032300023 |        0 |
+|  7415 | AARAV    | M      | CLERK               | 7902 | 1981-12-31 | 3350 | NULL |     10 |    NULL | AARAV        | NULL       | 7032300084 |        0 |
+|  7421 | THOMAS   | M      | CLERK               | 7920 | 1981-07-19 | 1750 | NULL |     10 |       1 | THOMAS       | r50mpm     | 7032300011 |        0 |
+|  7499 | ALLEN    | M      | SALESMAN            | 7698 | 1981-02-20 | 1600 |  300 |     30 |       4 | ALWAYS TESTE | sales@2017 | 7032300096 |        1 |
+|  7521 | WARD     | M      | SALESMAN            | 7698 | 1981-02-22 | 1250 |  500 |     30 |       1 | WARD         | sales@2017 | 7132300034 |        1 |
+|  7566 | JONES    | M      | MANAGER             | 7839 | 1981-04-02 | 2975 | NULL |     20 |       4 | HONEYCOMB    | a12recmpm  | 7132300039 |        1 |
+|  7654 | MARTIN   | M      | SALESMAN            | 7698 | 1981-09-28 | 1250 | 1400 |     30 |       6 | LIFE RACER   | sales@2017 | 7132300050 |        1 |
+|  7698 | BLAKE    | M      | MANAGER             | 7839 | 1981-05-01 | 2850 | NULL |     30 |       1 | BIG BEN      | sales@2017 | 7132300027 |        1 |
+|  7782 | CLARK    | M      | MANAGER             | 7839 | 1981-06-09 | 2450 | NULL |     10 |       3 | CLARK        | r50mpm     | 7032300001 |        1 |
+|  7788 | SCOTT    | M      | ANALYST             | 7566 | 1982-12-09 | 3000 | NULL |     20 |       3 | WHITE SAND   | a12recmpm  | NULL       |        1 |
+|  7839 | KING     | M      | PRESIDENT           | NULL | 1981-11-17 | 5000 | NULL |     10 |       1 | KING         | r50mpm     | 7132300081 |        1 |
+|  7840 | FRED     | M      | vice PRESIDENT      | 7839 | 1983-08-09 | 5000 | NULL |     20 |       1 | SAND STONE   | a12recmpm  | NULL       |        1 |
+|  7844 | TURNER   | M      | SALESMAN            | 7698 | 1981-09-08 | 1500 |    0 |     30 |       5 | SAND DUST    | sales@2017 | NULL       |        1 |
+|  7876 | ADAMS    | M      | CLERK               | 7788 | 1983-01-12 | 1100 | NULL |     20 |       1 | CRAZY ANYONE | a12recmpm  | 7132300086 |        1 |
+|  7888 | Ruhan    | M      | Network             | 7888 | 1983-08-09 | 2000 | NULL |     60 |       1 | Ruhan        | BRD@1122   | NULL       |        1 |
+|  7889 | Neel     | M      | vice PRESIDENT      | 7839 | 1983-08-09 | 1000 | NULL |     60 |       0 | Neel         | BRD@1122   | NULL       |        1 |
+|  7900 | JAMES    | M      | CLERK               | 7698 | 1981-12-03 |  950 | NULL |     30 |       2 | CRAZY LEADER | sales@2017 | 7132300042 |        1 |
+|  7902 | FORD     | M      | ANALYST             | 7566 | 1981-12-03 | 3000 | NULL |     20 |       4 | CONBRIO      | a12recmpm  | NULL       |        0 |
+|  7919 | HOFFMAN  | M      | MANAGER             | 7566 | 1982-03-24 | 4150 | NULL |     30 |       3 | INTERVAL     | sales@2017 | NULL       |        1 |
+|  7920 | GRASS    | M      | SALESMAN            | 7919 | 1980-02-14 | 2575 | 2700 |     30 |       5 | GRASS        | sales@2017 | NULL       |        1 |
+|  7934 | MILLER   | M      | CLERK               | 7782 | 1982-01-23 | 1300 | 1300 |     10 |       2 | QUARTERNOTE  | r50mpm     | 7132300055 |        0 |
+|  7945 | AARUSH   | M      | SALESMAN            | 7902 | 1980-02-14 | 1350 | 2700 |     30 |    NULL | AARUSH       | ABCDEF     | NULL       |        0 |
+|  7949 | ALEX     | M      | MANAGER             | 7698 | 1982-01-24 | 1250 |  500 |     30 |       5 | QUARTERREST  | sales@2017 | 7156567183 |        1 |
+|  8433 | NATASHA  | F      | CLERK               | 7920 | 1981-07-19 | 1750 | NULL |     30 |       1 | NATASHA      | sales@2017 | NULL       |        1 |
+|  9400 | SANGITA  | F      | Compliance officers | 7920 | 1981-07-19 | 1750 | NULL |     50 |       1 | SANGITA      | NULL       | NULL       |        1 |
+|  9473 | SUPRIYA  | F      | ANALYST             | 7920 | 1981-07-19 | 1750 | NULL |     50 |       1 | SUPRIYA      | XYZ@1234   | NULL       |        1 |
++-------+----------+--------+---------------------+------+------------+------+------+--------+---------+--------------+------------+------------+----------+
+30 rows in set (0.04 sec)
+
+mysql> select length(ename1), ename2 from emp;
+ERROR 1054 (42S22): Unknown column 'ename1' in 'field list'
+mysql> select length(ename)  from emp;
++---------------+
+| length(ename) |
++---------------+
+|             4 |
+|             8 |
+|             7 |
+|             7 |
+|             5 |
+|             5 |
+|             6 |
+|             5 |
+|             4 |
+|             5 |
+|             6 |
+|             5 |
+|             5 |
+|             5 |
+|             4 |
+|             4 |
+|             6 |
+|             5 |
+|             5 |
+|             4 |
+|             5 |
+|             4 |
+|             7 |
+|             5 |
+|             6 |
+|             6 |
+|             4 |
+|             7 |
+|             7 |
+|             7 |
++---------------+
+30 rows in set (0.00 sec)
+
+mysql> select length(ename) ename  from emp;
++-------+
+| ename |
++-------+
+|     4 |
+|     8 |
+|     7 |
+|     7 |
+|     5 |
+|     5 |
+|     6 |
+|     5 |
+|     4 |
+|     5 |
+|     6 |
+|     5 |
+|     5 |
+|     5 |
+|     4 |
+|     4 |
+|     6 |
+|     5 |
+|     5 |
+|     4 |
+|     5 |
+|     4 |
+|     7 |
+|     5 |
+|     6 |
+|     6 |
+|     4 |
+|     7 |
+|     7 |
+|     7 |
++-------+
+30 rows in set (0.00 sec)
+
+mysql> select length(ename) ,ename from emp;
++---------------+----------+
+| length(ename) | ename    |
++---------------+----------+
+|             4 | GITA     |
+|             8 | VRUSHALI |
+|             7 | SHARMIN  |
+|             7 | BANDISH  |
+|             5 | SMITH    |
+|             5 | AARAV    |
+|             6 | THOMAS   |
+|             5 | ALLEN    |
+|             4 | WARD     |
+|             5 | JONES    |
+|             6 | MARTIN   |
+|             5 | BLAKE    |
+|             5 | CLARK    |
+|             5 | SCOTT    |
+|             4 | KING     |
+|             4 | FRED     |
+|             6 | TURNER   |
+|             5 | ADAMS    |
+|             5 | Ruhan    |
+|             4 | Neel     |
+|             5 | JAMES    |
+|             4 | FORD     |
+|             7 | HOFFMAN  |
+|             5 | GRASS    |
+|             6 | MILLER   |
+|             6 | AARUSH   |
+|             4 | ALEX     |
+|             7 | NATASHA  |
+|             7 | SANGITA  |
+|             7 | SUPRIYA  |
++---------------+----------+
+30 rows in set (0.00 sec)
+
+mysql> desc emp;
++-----------+-------------+------+-----+---------+-------+
+| Field     | Type        | Null | Key | Default | Extra |
++-----------+-------------+------+-----+---------+-------+
+| EMPNO     | int         | NO   | PRI | NULL    |       |
+| ENAME     | varchar(12) | YES  |     | NULL    |       |
+| GENDER    | char(1)     | YES  |     | NULL    |       |
+| JOB       | varchar(20) | YES  |     | NULL    |       |
+| MGR       | int         | YES  | MUL | NULL    |       |
+| HIREDATE  | date        | YES  |     | NULL    |       |
+| SAL       | int         | YES  |     | NULL    |       |
+| COMM      | int         | YES  |     | NULL    |       |
+| DEPTNO    | int         | NO   | MUL | NULL    |       |
+| BONUSID   | int         | YES  |     | NULL    |       |
+| USER NAME | varchar(20) | YES  |     | NULL    |       |
+| PWD       | varchar(20) | YES  |     | NULL    |       |
+| PHONE     | varchar(45) | YES  |     | NULL    |       |
+| isActive  | tinyint(1)  | YES  |     | NULL    |       |
++-----------+-------------+------+-----+---------+-------+
+14 rows in set (0.00 sec)
+
+mysql>  SET sql_mode = 'PAD_CHAR_TO_FULL_LENGTH';
+Query OK, 0 rows affected, 1 warning (0.00 sec)
+
+mysql> select 34+343;
++--------+
+| 34+343 |
++--------+
+|    377 |
++--------+
+1 row in set (0.00 sec)
+
+mysql> create tabel ASWASTHAAMA(c1 int auto_increment);
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'tabel ASWASTHAAMA(c1 int auto_increment)' at line 1
+mysql> create tabel ASWASTHAAMA(c1 int auto_increment,Figters varchar(20);
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'tabel ASWASTHAAMA(c1 int auto_increment,Figters varchar(20)' at line 1
+mysql> create tabel ASWASTHAAMA(c1 int auto_increment);
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'tabel ASWASTHAAMA(c1 int auto_increment)' at line 1
+mysql> create tabel ASWASTHAAMA(c1 int auto_increment,c2 int);
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'tabel ASWASTHAAMA(c1 int auto_increment,c2 int)' at line 1
+mysql> create table a(c1 int primary key auto_increment, c2 int);
+ERROR 1050 (42S01): Table 'a' already exists
+mysql> create tabel ASWASTHAAMA(c1 int auto_increment);
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'tabel ASWASTHAAMA(c1 int auto_increment)' at line 1
+mysql> create table Ashwathama(ID int primary key auto_increment, yodha_name varchar(20));
+Query OK, 0 rows affected (0.32 sec)
+
+mysql> create table Ashwathama(ID int primary key auto_increment);
+ERROR 1050 (42S01): Table 'ashwathama' already exists
+mysql> create table SHIKHANDI(ID int primary key auto_increment);
+Query OK, 0 rows affected (0.62 sec)
+
+mysql> desc tables;
+ERROR 1146 (42S02): Table 'dac11.tables' doesn't exist
+mysql> desc shikhandi;
++-------+------+------+-----+---------+----------------+
+| Field | Type | Null | Key | Default | Extra          |
++-------+------+------+-----+---------+----------------+
+| ID    | int  | NO   | PRI | NULL    | auto_increment |
++-------+------+------+-----+---------+----------------+
+1 row in set (0.00 sec)
+
+mysql> desc ashwathama;
++------------+-------------+------+-----+---------+----------------+
+| Field      | Type        | Null | Key | Default | Extra          |
++------------+-------------+------+-----+---------+----------------+
+| ID         | int         | NO   | PRI | NULL    | auto_increment |
+| yodha_name | varchar(20) | YES  |     | NULL    |                |
++------------+-------------+------+-----+---------+----------------+
+2 rows in set (0.00 sec)
+
+mysql> insert into ashwathama value(default,"Brahmastra");
+Query OK, 1 row affected (0.06 sec)
+
+mysql> select * from ashwathama;
++----+------------+
+| ID | yodha_name |
++----+------------+
+|  1 | Brahmastra |
++----+------------+
+1 row in set (0.00 sec)
+
+mysql> delete ashwathama;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '' at line 1
+mysql> delete table  ashwathama;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'table  ashwathama' at line 1
+mysql> insert into ashwathama value(default,"Brahmastra","Chapter-2");
+ERROR 1136 (21S01): Column count doesn't match value count at row 1
+mysql> insert into ashwathama value(default,"Vanarashtra");
+Query OK, 1 row affected (0.06 sec)
+
+mysql> select * from ashwathama;
++----+-------------+
+| ID | yodha_name  |
++----+-------------+
+|  1 | Brahmastra  |
+|  2 | Vanarashtra |
++----+-------------+
+2 rows in set (0.00 sec)
+
+mysql> insert into ashwathama(11,"Pashupati-astra");
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '11,"Pashupati-astra")' at line 1
+mysql> insert into ashwathama(11,"Pashupati-astra");
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '11,"Pashupati-astra")' at line 1
+mysql> insert into ashwathama value(11,"Pashupati-astra");
+Query OK, 1 row affected (0.05 sec)
+
+mysql> select * from ashwathama;
++----+-----------------+
+| ID | yodha_name      |
++----+-----------------+
+|  1 | Brahmastra      |
+|  2 | Vanarashtra     |
+| 11 | Pashupati-astra |
++----+-----------------+
+3 rows in set (0.00 sec)
+
+mysql> insert into values(default,"Naag-Paash");
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'values(default,"Naag-Paash")' at line 1
+mysql> insert into ashwathama values(default,"Naag-Paash");
+Query OK, 1 row affected (0.05 sec)
+
+mysql> select * from ashwathama;
++----+-----------------+
+| ID | yodha_name      |
++----+-----------------+
+|  1 | Brahmastra      |
+|  2 | Vanarashtra     |
+| 11 | Pashupati-astra |
+| 12 | Naag-Paash      |
++----+-----------------+
+4 rows in set (0.00 sec)
+
+mysql> insert into ashwathama value(3,"Mani-Bandh");
+Query OK, 1 row affected (0.05 sec)
+
+mysql> select * from ashwathama;
++----+-----------------+
+| ID | yodha_name      |
++----+-----------------+
+|  1 | Brahmastra      |
+|  2 | Vanarashtra     |
+|  3 | Mani-Bandh      |
+| 11 | Pashupati-astra |
+| 12 | Naag-Paash      |
++----+-----------------+
+5 rows in set (0.00 sec)
+
+mysql> insert into ashwathama values(default,"Agni-Astra");
+Query OK, 1 row affected (0.07 sec)
+
+mysql> select * from ashwathama;
++----+-----------------+
+| ID | yodha_name      |
++----+-----------------+
+|  1 | Brahmastra      |
+|  2 | Vanarashtra     |
+|  3 | Mani-Bandh      |
+| 11 | Pashupati-astra |
+| 12 | Naag-Paash      |
+| 13 | Agni-Astra      |
++----+-----------------+
+6 rows in set (0.00 sec)
+
+mysql> create table ASTRA-VERSE(ASTRA_ID int primary auto_increment,ASTRA_NAME varchar(20),ASTRA'S POWER varchar(100));
+    '> ^C
+mysql> create table ASTRA-VERSE(ASTRA_ID int primary auto_increment,ASTRA_NAME varchar(20),ASTRA'S-POWER varchar(100));
+    '> ;
+    '> ;
+    '> exit;
+    '> ^C
+mysql> create table ASTRA-VERSE(ASTRA_ID int primary key auto_increment,ASTRA_NAME varchar(20),ASTRA'S-POWER varchar(100));
+    '> ^C
+mysql> create table ASTRA-VERSE(ASTRA_ID int primary key auto_increment,ASTRA_NAME varchar(20),ASTRA'S-POWER varchar(100));
+    '> create table ASTRA-VERSE(ASTRA_ID int primary key auto_increment,ASTRA_NAME varchar(20),ASTRA'S-POWER varchar(100));
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '-VERSE(ASTRA_ID int primary key auto_increment,ASTRA_NAME varchar(20),ASTRA'S-PO' at line 1
+mysql>
+mysql> create table ASTRA-VERSE(ASTRA_ID int primary key auto_increment,ASTRA_NAME varchar(20),ASTRAS-POWER varchar(100));
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '-VERSE(ASTRA_ID int primary key auto_increment,ASTRA_NAME varchar(20),ASTRAS-POW' at line 1
+mysql> create table ASTRA-VERSE(ASTRA_ID int primary key auto_increment,ASTRA_NAME varchar(20),ASTRAS-POWER varchar(100));
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '-VERSE(ASTRA_ID int primary key auto_increment,ASTRA_NAME varchar(20),ASTRAS-POW' at line 1
+mysql> create table ASTRA-VERSE(ASTRA_ID int auto_increment,ASTRA_NAME varchar(20),ASTRAS-POWER varchar(100));
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '-VERSE(ASTRA_ID int auto_increment,ASTRA_NAME varchar(20),ASTRAS-POWER varchar(1' at line 1
+mysql> create table ASTRAVERSE(ASTRA_ID int auto_increment,ASTRA_NAME varchar(20),ASTRAS-POWER varchar(100));
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '-POWER varchar(100))' at line 1
+mysql> create table ASTRAVERSE(ASTRA_ID int auto_increment,ASTRA_NAME varchar(20),ASTRAS-POWER varchar(100));
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '-POWER varchar(100))' at line 1
+mysql> create table ASTRAVERSE(ASTRA_ID int auto_increment,ASTRA_NAME varchar(20),ASTRAS_POWER varchar(100));
+ERROR 1075 (42000): Incorrect table definition; there can be only one auto column and it must be defined as a key
+mysql> create table ASTRAVERSE(ASTRA_ID int auto_increment Unique key,ASTRA_NAME varchar(20),ASTRAS_POWER varchar(100));
+Query OK, 0 rows affected (1.25 sec)
+
+mysql> create table ASTRAVERSE(ASTRA_ID int auto_increment Unique key,ASTRA_NAME varchar(20),ASTRAS_POWER varchar(100));
+ERROR 1050 (42S01): Table 'astraverse' already exists
+mysql> show astraverse;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'astraverse' at line 1
+mysql> desc astraverse;
++--------------+--------------+------+-----+---------+----------------+
+| Field        | Type         | Null | Key | Default | Extra          |
++--------------+--------------+------+-----+---------+----------------+
+| ASTRA_ID     | int          | NO   | PRI | NULL    | auto_increment |
+| ASTRA_NAME   | varchar(20)  | YES  |     | NULL    |                |
+| ASTRAS_POWER | varchar(100) | YES  |     | NULL    |                |
++--------------+--------------+------+-----+---------+----------------+
+3 rows in set (0.00 sec)
+
+mysql> insert into astraverse value(default,"BRAHMASTRA","Supreme Astra of Entire Universe");
+Query OK, 1 row affected (0.06 sec)
+
+mysql> insert into astraverse value(default,"NAG-PASH","Power of Snake's Agility");
+Query OK, 1 row affected (0.06 sec)
+
+mysql> insert into astraverse value(default ,"VANARASTRA","Monkeys Power of flexibility");
+Query OK, 1 row affected (0.08 sec)
+
+mysql> select * fom astraverse;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'fom astraverse' at line 1
+mysql> select * from astraverse;
++----------+------------+----------------------------------+
+| ASTRA_ID | ASTRA_NAME | ASTRAS_POWER                     |
++----------+------------+----------------------------------+
+|        1 | BRAHMASTRA | Supreme Astra of Entire Universe |
+|        2 | NAG-PASH   | Power of Snake's Agility         |
+|        3 | VANARASTRA | Monkeys Power of flexibility     |
++----------+------------+----------------------------------+
+3 rows in set (0.00 sec)
+
+mysql> insert into astraverse value(default,"PASHUPATI-ASTRA","Power of Supreme Baghwan PASHURAM");
+Query OK, 1 row affected (0.06 sec)
+
+mysql> select * from ashwatha;
+ERROR 1146 (42S02): Table 'dac11.ashwatha' doesn't exist
+mysql> select * from ashwathama;
++----+-----------------+
+| ID | yodha_name      |
++----+-----------------+
+|  1 | Brahmastra      |
+|  2 | Vanarashtra     |
+|  3 | Mani-Bandh      |
+| 11 | Pashupati-astra |
+| 12 | Naag-Paash      |
+| 13 | Agni-Astra      |
++----+-----------------+
+6 rows in set (0.00 sec)
+
+mysql> select * from astraverse;
++----------+-----------------+-----------------------------------+
+| ASTRA_ID | ASTRA_NAME      | ASTRAS_POWER                      |
++----------+-----------------+-----------------------------------+
+|        1 | BRAHMASTRA      | Supreme Astra of Entire Universe  |
+|        2 | NAG-PASH        | Power of Snake's Agility          |
+|        3 | VANARASTRA      | Monkeys Power of flexibility      |
+|        4 | PASHUPATI-ASTRA | Power of Supreme Baghwan PASHURAM |
++----------+-----------------+-----------------------------------+
+4 rows in set (0.00 sec)
+
+mysql> create table (id int primary key auto_increment, ename varchar(10), city varchar(10) default 'Baroda');
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '(id int primary key auto_increment, ename varchar(10), city varchar(10) default ' at line 1
+mysql> create table PDGDAC(ID int unique key auto_increment,Candidate_Name varchar(20),Institute varchar(3) default 'IET');
+Query OK, 0 rows affected (0.32 sec)
+
+mysql> desc PGDAC;
+ERROR 1146 (42S02): Table 'dac11.pgdac' doesn't exist
+mysql> select desc PDGDAC;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'desc PDGDAC' at line 1
+mysql> desc ^C
+mysql> ;
+ERROR:
+No query specified
+
+mysql> create table PGDAC(ID int unique key auto_increment,Candidate_Name varchar(20),Institute varchar(3) default 'IET');
+Query OK, 0 rows affected (0.33 sec)
+
+mysql> desc PGDAC;
++----------------+-------------+------+-----+---------+----------------+
+| Field          | Type        | Null | Key | Default | Extra          |
++----------------+-------------+------+-----+---------+----------------+
+| ID             | int         | NO   | PRI | NULL    | auto_increment |
+| Candidate_Name | varchar(20) | YES  |     | NULL    |                |
+| Institute      | varchar(3)  | YES  |     | IET     |                |
++----------------+-------------+------+-----+---------+----------------+
+3 rows in set (0.00 sec)
+
+mysql> insert into PGDAC value(default,"Atul",default);
+Query OK, 1 row affected (0.05 sec)
+
+mysql> insert into PGDAC value(default,"Atul");
+ERROR 1136 (21S01): Column count doesn't match value count at row 1
+mysql> insert into PGDAC value(default,"Mukundan",default);
+Query OK, 1 row affected (0.07 sec)
+
+mysql> select * from PGDAC;
++----+----------------+-----------+
+| ID | Candidate_Name | Institute |
++----+----------------+-----------+
+|  1 | Atul           | IET       |
+|  2 | Mukundan       | IET       |
++----+----------------+-----------+
+2 rows in set (0.00 sec)
+
+mysql> update PGDAC set Candidate_Name ="KING" WHERE Candidate_Name ="Atul";
+Query OK, 1 row affected (0.05 sec)
+Rows matched: 1  Changed: 1  Warnings: 0
+
+mysql> select * from PGDAC;
++----+----------------+-----------+
+| ID | Candidate_Name | Institute |
++----+----------------+-----------+
+|  1 | KING           | IET       |
+|  2 | Mukundan       | IET       |
++----+----------------+-----------+
+2 rows in set (0.00 sec)
+
+mysql> Alter PGDAC;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'PGDAC' at line 1
+mysql> Alter PGDAC;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'PGDAC' at line 1
+mysql> ALTER Table PGDAC;
+Query OK, 0 rows affected (0.05 sec)
+
+mysql> ADD Course varchar(20);
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'ADD Course varchar(20)' at line 1
+mysql> add Column(course varchar(20));
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'add Column(course varchar(20))' at line 1
+mysql> delete from PGDAC where Candidate_Name="KING";
+Query OK, 1 row affected (0.06 sec)
+
+mysql> select * from PGdac;
++----+----------------+-----------+
+| ID | Candidate_Name | Institute |
++----+----------------+-----------+
+|  2 | Mukundan       | IET       |
++----+----------------+-----------+
+1 row in set (0.00 sec)
+
+mysql>
