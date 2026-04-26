@@ -1,2 +1,2 @@
 # CDAC 
-CDAC All Notes 
+I have some CDAC Regarding practicals, Hope it helps! 
