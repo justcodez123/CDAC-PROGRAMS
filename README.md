@@ -1,2 +1,1 @@
-# CDAC 
-I have some CDAC Regarding practicals, Hope it is helpful for you! 
+I used to attend CDAC. I have some practicals, Hope it is helpful as a learning material.
