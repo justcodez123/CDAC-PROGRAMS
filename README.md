@@ -1,2 +1,2 @@
 # CDAC 
-I have some CDAC Regarding practicals, Hope it helps! 
+I have some CDAC Regarding practicals, Hope it is helpful for you! 
